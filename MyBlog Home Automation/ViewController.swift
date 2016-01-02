@@ -58,7 +58,6 @@ class ViewController: UIViewController {
             print(button.id)
             
             self.counter += 1
-            //let aButton = HomeControlButton(id: post["id"].stringValue)
             button.frame = CGRect(x: Int(self.view.bounds.width - 70), y: 20+self.counter*70,
                 width: 60, height: 60)
             self.view.addSubview(button)
@@ -71,17 +70,14 @@ class ViewController: UIViewController {
             var url:String = "http://192.168.1."
             url += String(index)
             url += "/state"
-            //print(url)
-            Alamofire.request(.GET, url).responseJSON {
-                response in
+
+            Alamofire.request(.GET, url).responseJSON {response in
                 
                 switch response.result {
                 case .Success:
                     
                     if let value: AnyObject = response.result.value {
                         let post = JSON(value)
-                        //print(post["id"])
-                        
                         
                         self.counter += 1
                         let aButton = HomeControlButton(id: post["id"].stringValue)
@@ -89,15 +85,9 @@ class ViewController: UIViewController {
                             width: 60, height: 60)
                         self.buttons.append(aButton)
                         self.view.addSubview(aButton)
-                        
-                        let defaults = NSUserDefaults.standardUserDefaults()
-                        let buttonData = NSKeyedArchiver.archivedDataWithRootObject(self.buttons)
-                        defaults.setObject(buttonData, forKey: "buttons")
-                        
                     }
                     
                 case .Failure:
-                    // print("Not OK" + url)
                     print("")
                     
                 }
@@ -105,7 +95,5 @@ class ViewController: UIViewController {
             }
         }
     }
-
-
 }
 
