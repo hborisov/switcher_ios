@@ -32,8 +32,13 @@ class ViewController: UIViewController {
     
     @IBAction func SaveButtons(sender: UIButton) {
         let defaults = NSUserDefaults.standardUserDefaults()
+
+        
         let buttonData = NSKeyedArchiver.archivedDataWithRootObject(self.buttons)
         defaults.setObject(buttonData, forKey: "buttons")
+        
+        
+        print("saved")
     }
     
     func loadSwitches() {

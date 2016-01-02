@@ -32,15 +32,9 @@ class HomeControlButton: UIButton {
         self.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.setBackgroundImage(UIImage(named: "light-bulb-3.png"), forState: UIControlState.Normal)
-    }
-    
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.setBackgroundImage(UIImage(named: "light-bulb-3.png"), forState: UIControlState.Normal)
         
         let id = aDecoder.decodeObjectForKey("id") as? String
         self.id = id!
@@ -49,20 +43,22 @@ class HomeControlButton: UIButton {
         
         let isSwitched = aDecoder.decodeBoolForKey("isSwitched")
         self.isSwitched = isSwitched
-
-        print("init")
-        print(self.id)
+        print(self.isSwitched)
+        print(isSwitched)
+        
+        if self.isSwitched {
+            self.setBackgroundImage(UIImage(named: "light-bulb-3-on.png"), forState: UIControlState.Normal)
+        } else {
+            self.setBackgroundImage(UIImage(named: "light-bulb-3.png"), forState: UIControlState.Normal)
+        }
     }
     
     override func encodeWithCoder(aCoder: NSCoder) {
-        print("encoding...")
         aCoder.encodeObject(id, forKey: "id")
         aCoder.encodeBool(isSwitched, forKey: "isSwitched")
     }
     
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
         super.touchesBegan(touches, withEvent: event)
     }
     
@@ -72,6 +68,17 @@ class HomeControlButton: UIButton {
         
         super.touchesEnded(touches, withEvent: event)
     }
+    
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first! as UITouch
+        let previousPoint = touch.previousLocationInView(self)
+        let point  = touch.locationInView(self)
+
+        let translation = CGPoint(x: point.x-previousPoint.x, y: point.y - previousPoint.y)
+        self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
+    }
+    
+
     
     func toggle() {
         if isSwitched {
