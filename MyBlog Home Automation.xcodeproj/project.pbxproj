@@ -12,6 +12,9 @@
 		23919F921C37F7F500EEA764 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23919F901C37F7F500EEA764 /* Main.storyboard */; };
 		23919F941C37F7F500EEA764 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 23919F931C37F7F500EEA764 /* Assets.xcassets */; };
 		23919F971C37F7F500EEA764 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23919F951C37F7F500EEA764 /* LaunchScreen.storyboard */; };
+		23919FA11C37FB4F00EEA764 /* light-bulb-3-on.png in Resources */ = {isa = PBXBuildFile; fileRef = 23919F9E1C37FB4F00EEA764 /* light-bulb-3-on.png */; };
+		23919FA21C37FB4F00EEA764 /* light-bulb-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 23919F9F1C37FB4F00EEA764 /* light-bulb-3.png */; };
+		23919FA31C37FB4F00EEA764 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FA01C37FB4F00EEA764 /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		23919F931C37F7F500EEA764 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		23919F961C37F7F500EEA764 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		23919F981C37F7F500EEA764 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23919F9E1C37FB4F00EEA764 /* light-bulb-3-on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "light-bulb-3-on.png"; path = "../../../SwiftTutorial/SwiftTutorial/light-bulb-3-on.png"; sourceTree = "<group>"; };
+		23919F9F1C37FB4F00EEA764 /* light-bulb-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "light-bulb-3.png"; path = "../../../SwiftTutorial/SwiftTutorial/light-bulb-3.png"; sourceTree = "<group>"; };
+		23919FA01C37FB4F00EEA764 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../../SwiftTutorial/SwiftTutorial/SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,9 @@
 		23919F8B1C37F7F500EEA764 /* MyBlog Home Automation */ = {
 			isa = PBXGroup;
 			children = (
+				23919F9E1C37FB4F00EEA764 /* light-bulb-3-on.png */,
+				23919F9F1C37FB4F00EEA764 /* light-bulb-3.png */,
+				23919FA01C37FB4F00EEA764 /* SwiftyJSON.swift */,
 				23919F8C1C37F7F500EEA764 /* AppDelegate.swift */,
 				23919F8E1C37F7F500EEA764 /* ViewController.swift */,
 				23919F901C37F7F500EEA764 /* Main.storyboard */,
@@ -125,6 +134,8 @@
 			files = (
 				23919F971C37F7F500EEA764 /* LaunchScreen.storyboard in Resources */,
 				23919F941C37F7F500EEA764 /* Assets.xcassets in Resources */,
+				23919FA11C37FB4F00EEA764 /* light-bulb-3-on.png in Resources */,
+				23919FA21C37FB4F00EEA764 /* light-bulb-3.png in Resources */,
 				23919F921C37F7F500EEA764 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -136,6 +147,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				23919FA31C37FB4F00EEA764 /* SwiftyJSON.swift in Sources */,
 				23919F8F1C37F7F500EEA764 /* ViewController.swift in Sources */,
 				23919F8D1C37F7F500EEA764 /* AppDelegate.swift in Sources */,
 			);
