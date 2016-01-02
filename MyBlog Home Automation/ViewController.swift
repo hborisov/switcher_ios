@@ -57,10 +57,32 @@ class ViewController: UIViewController {
             print("in loading")
             print(button.id)
             
-            self.counter += 1
-            button.frame = CGRect(x: Int(self.view.bounds.width - 70), y: 20+self.counter*70,
-                width: 60, height: 60)
-            self.view.addSubview(button)
+            
+            Alamofire.request(.GET, "http://"+button.id+".local/state").responseJSON {response in
+                
+                switch response.result {
+                case .Success:
+                    
+                    if let value: AnyObject = response.result.value {
+                        let payload = JSON(value)
+                        if payload["state"].boolValue {
+                            button.setSwitchedOn()
+                        } else {
+                            button.setSwitchedOff()
+                        }
+                        
+                        self.counter += 1
+                        button.frame = CGRect(x: Int(self.view.bounds.width - 70), y: 20+self.counter*70,
+                            width: 60, height: 60)
+                        self.view.addSubview(button)
+                    }
+                    
+                case .Failure:
+                    print("")
+                }
+            }
+
+            
         }
     }
     
@@ -89,7 +111,6 @@ class ViewController: UIViewController {
                     
                 case .Failure:
                     print("")
-                    
                 }
                 
             }

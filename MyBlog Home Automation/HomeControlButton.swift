@@ -78,28 +78,28 @@ class HomeControlButton: UIButton {
         self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
     }
     
-
     
     func toggle() {
+        var url = "http://" + id + ".local"
         if isSwitched {
-            var url = "http://"
-            url += id
-            url += ".local/on"
-            print(url)
-            Alamofire.request(.GET, url)
-            
-            isSwitched = !isSwitched
-            self.setBackgroundImage(UIImage(named: "light-bulb-3-on.png"), forState: UIControlState.Normal)
+            url += "/off"
+            setSwitchedOff()
         } else {
-            var url = "http://"
-            url += id
-            url += ".local/off"
-            Alamofire.request(.GET, url)
-            
-            isSwitched = !isSwitched
-            self.setBackgroundImage(UIImage(named: "light-bulb-3.png"), forState: UIControlState.Normal)
+            url += "/on"
+            setSwitchedOn()
         }
-        
+        print(url)
+        Alamofire.request(.GET, url)
+    }
+    
+    func setSwitchedOn() {
+        isSwitched = true
+        self.setBackgroundImage(UIImage(named: "light-bulb-3-on.png"), forState: UIControlState.Normal)
+    }
+    
+    func setSwitchedOff() {
+        isSwitched = false
+        self.setBackgroundImage(UIImage(named: "light-bulb-3.png"), forState: UIControlState.Normal)
     }
 
 }
