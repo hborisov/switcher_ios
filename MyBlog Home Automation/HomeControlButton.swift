@@ -19,7 +19,6 @@ class HomeControlButton: UIButton {
     }
     */
     
-    
     var isSwitched: Bool = false
     var id: String = ""
     
@@ -32,7 +31,6 @@ class HomeControlButton: UIButton {
         self.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -42,15 +40,14 @@ class HomeControlButton: UIButton {
         self.setTitleColor(UIColor.redColor(), forState: UIControlState.Normal)
         
         let isSwitched = aDecoder.decodeBoolForKey("isSwitched")
-        self.isSwitched = isSwitched
-        print(self.isSwitched)
-        print(isSwitched)
-        
-        if self.isSwitched {
-            self.setBackgroundImage(UIImage(named: "light-bulb-3-on.png"), forState: UIControlState.Normal)
+        if isSwitched {
+            setSwitchedOn()
         } else {
-            self.setBackgroundImage(UIImage(named: "light-bulb-3.png"), forState: UIControlState.Normal)
+            setSwitchedOff()
         }
+        
+        let recognizer = UITapGestureRecognizer(target: self, action:Selector("handleTap:"))
+        self.addGestureRecognizer(recognizer)
     }
     
     override func encodeWithCoder(aCoder: NSCoder) {
@@ -63,9 +60,6 @@ class HomeControlButton: UIButton {
     }
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        
-        toggle()
-        
         super.touchesEnded(touches, withEvent: event)
     }
     
@@ -78,6 +72,9 @@ class HomeControlButton: UIButton {
         self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
     }
     
+    func handleTap(recognizer: UITapGestureRecognizer) {
+        toggle()
+    }
     
     func toggle() {
         var url = "http://" + id + ".local"
