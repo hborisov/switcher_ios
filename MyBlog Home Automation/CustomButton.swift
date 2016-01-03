@@ -34,25 +34,46 @@ class CustomButton: UIControl {
     var onImage = UIImage()
     var offImage = UIImage()
     
-    var switchState = false
-    var switchId = ""
+    var switchState: Bool
+    var switchId: String
     var buttonAction: CustomButtonDelegate?
     
     internal override init(frame: CGRect) {
-        super.init(frame: frame)
+//        super.init(frame: frame)
+        self.switchId = ""
+        self.switchState = false
         
+        super.init(frame: frame)
+        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
+
+
         self.setUp()
     }
     
-    
     required init?(coder aDecoder: NSCoder) {
+        self.switchState = false
+        self.switchId = ""
         super.init(coder: aDecoder)
         
+        
+        
+
+        let x = aDecoder.decodeObjectForKey("x") as! CGFloat
+        let y = aDecoder.decodeObjectForKey("y") as! CGFloat
+        let width = aDecoder.decodeObjectForKey("width") as! CGFloat
+        let height = aDecoder.decodeObjectForKey("height") as! CGFloat
+        self.frame = CGRectMake(x, y, width, height)
         self.setUp()
+        
+        let switchId = aDecoder.decodeObjectForKey("switchId") as! String
+        self.switchId = switchId
+        let switchState = aDecoder.decodeBoolForKey("switchState")
+        self.setState(switchState)
+        let title = aDecoder.decodeObjectForKey("title") as! String
+        self.setTitle(title)
     }
     
     func setUp() {
-        self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
         
         textField.frame = CGRect(x: 0, y: 60, width:self.frame.size.width, height: 40)
         textField.textAlignment = NSTextAlignment.Center
@@ -87,6 +108,16 @@ class CustomButton: UIControl {
         let translation = CGPoint(x: point.x-previousPoint.x, y: point.y - previousPoint.y)
         self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
     }
+
+    override func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(switchId, forKey: "switchId")
+        aCoder.encodeBool(switchState, forKey: "switchState")
+        aCoder.encodeObject(self.frame.origin.x, forKey: "x")
+        aCoder.encodeObject(self.frame.origin.y, forKey: "y")
+        aCoder.encodeObject(self.frame.size.width, forKey: "width")
+        aCoder.encodeObject(self.frame.size.height, forKey: "height")
+        aCoder.encodeObject(self.textField.text, forKey: "title")
+    }
     
     func setTitle(title: String) {
         textField.text = title
@@ -106,13 +137,21 @@ class CustomButton: UIControl {
     }
     
     func setSwitchOn() {
-        switchState = true
+        self.switchState = true
         self.backgroundColor = UIColor(patternImage: onImage)
     }
     
     func setSwitchOff() {
-        switchState = false
+        self.switchState = false
         self.backgroundColor = UIColor(patternImage: offImage)
+    }
+    
+    func setState(state: Bool) {
+        if state {
+            self.setSwitchOn()
+        } else {
+            self.setSwitchOff()
+        }
     }
     
     func addAction(action: CustomButtonDelegate) {

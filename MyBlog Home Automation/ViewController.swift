@@ -14,20 +14,12 @@ import Alamofire
 class ViewController: UIViewController {
     var counter: Int = 0
     var buttons = [HomeControlButton]()
-
-    
+    var newButtons = [CustomButton]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadSwitches()
-        
-        let action = LampSwitchAction()
-        let customButton = CustomButton(frame: CGRect(x: 40, y: 60, width: 80, height: 100))
-        customButton.switchId = "000003"
-        customButton.setTitle("Light Switch 000001")
-        customButton.addAction(action)
-        self.view.addSubview(customButton)
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,20 +38,27 @@ class ViewController: UIViewController {
         let buttonData = NSKeyedArchiver.archivedDataWithRootObject(self.buttons)
         defaults.setObject(buttonData, forKey: "buttons")
         
+        let newButtonsData = NSKeyedArchiver.archivedDataWithRootObject(self.newButtons)
+        defaults.setObject(newButtonsData, forKey: "newButtons")
+        
         
         print("saved")
     }
     
     func loadSwitches() {
         let defaults = NSUserDefaults.standardUserDefaults()
-        let buttonData = defaults.objectForKey("buttons") as? NSData
-        if let buttonData = buttonData  {
-            print("loading")
-            let loadedbuttons = (NSKeyedUnarchiver.unarchiveObjectWithData(buttonData) as? [HomeControlButton])!
-            self.buttons = loadedbuttons
-            print(loadedbuttons.count)
-            print(self.buttons.count)
+        let newButtonData = defaults.objectForKey("newButtons") as? NSData
+
+        if let newButtonData = newButtonData {
+            let loadedNewButtons = (NSKeyedUnarchiver.unarchiveObjectWithData(newButtonData) as? [CustomButton])!
+            self.newButtons = loadedNewButtons
+        }
+        
+        for button in self.newButtons {
+            let action = LampSwitchAction()
+            button.addAction(action)
             
+            self.view.addSubview(button)
         }
         
         for button in self.buttons {
@@ -84,21 +83,6 @@ class ViewController: UIViewController {
                         button.frame = CGRect(x: Int(self.view.bounds.width - 70), y: 20+self.counter*70,
                             width: 60, height: 60)
                         self.view.addSubview(button)
-                        
-                        
-                        
-                        let action = LampSwitchAction()
-                        let customButton = CustomButton(frame: CGRect(x: 10, y: 20+self.counter*100,
-                            width: 80, height: 100))
-                        if payload["state"].boolValue {
-                            customButton.setSwitchOn()
-                        } else {
-                            customButton.setSwitchOff()
-                        }
-                        customButton.switchId = payload["id"].stringValue
-                        customButton.setTitle("Light Switch "+payload["id"].stringValue)
-                        customButton.addAction(action)
-                        self.view.addSubview(customButton)
 
                     }
                     
@@ -127,11 +111,22 @@ class ViewController: UIViewController {
                         let post = JSON(value)
                         
                         self.counter += 1
-                        let aButton = HomeControlButton(id: post["id"].stringValue)
-                        aButton.frame = CGRect(x: Int(self.view.bounds.width - 70), y: 20+self.counter*70,
-                            width: 60, height: 60)
-                        self.buttons.append(aButton)
-                        self.view.addSubview(aButton)
+
+                        
+                        let action = LampSwitchAction()
+                        let customButton = CustomButton(frame: CGRect(x: 10, y: 20+self.counter*100,
+                            width: 80, height: 100))
+                        if post["state"].boolValue {
+                            customButton.setSwitchOn()
+                        } else {
+                            customButton.setSwitchOff()
+                        }
+                        customButton.switchId = post["id"].stringValue
+                        customButton.setTitle("Light Switch "+post["id"].stringValue)
+                        customButton.addAction(action)
+                        self.newButtons.append(customButton)
+                        self.view.addSubview(customButton)
+                        
                     }
                     
                 case .Failure:
@@ -142,8 +137,6 @@ class ViewController: UIViewController {
         }
     }
     
-    func handleTapView(recognizer: UITapGestureRecognizer) {
-        print("Tap view")
-    }
+   
 }
 
