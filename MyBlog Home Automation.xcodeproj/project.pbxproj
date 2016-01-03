@@ -18,6 +18,7 @@
 		23919FBC1C37FD0700EEA764 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23919FAF1C37FC8000EEA764 /* Alamofire.framework */; };
 		23919FBD1C37FD0700EEA764 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23919FAF1C37FC8000EEA764 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		23919FC21C37FD4B00EEA764 /* HomeControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FC11C37FD4B00EEA764 /* HomeControlButton.swift */; };
+		23919FC41C3942C300EEA764 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FC31C3942C300EEA764 /* CustomButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		23919FA01C37FB4F00EEA764 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../../SwiftTutorial/SwiftTutorial/SwiftyJSON.swift; sourceTree = "<group>"; };
 		23919FA41C37FC7F00EEA764 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
 		23919FC11C37FD4B00EEA764 /* HomeControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeControlButton.swift; sourceTree = "<group>"; };
+		23919FC31C3942C300EEA764 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 				23919F951C37F7F500EEA764 /* LaunchScreen.storyboard */,
 				23919F981C37F7F500EEA764 /* Info.plist */,
 				23919FC11C37FD4B00EEA764 /* HomeControlButton.swift */,
+				23919FC31C3942C300EEA764 /* CustomButton.swift */,
 			);
 			path = "MyBlog Home Automation";
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				23919FA31C37FB4F00EEA764 /* SwiftyJSON.swift in Sources */,
 				23919F8F1C37F7F500EEA764 /* ViewController.swift in Sources */,
 				23919F8D1C37F7F500EEA764 /* AppDelegate.swift in Sources */,
+				23919FC41C3942C300EEA764 /* CustomButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         loadSwitches()
+        
+        let customButton = CustomButton(frame: CGRect(x: 40, y: 60, width: 80, height: 100))
+        customButton.setTitle("Light Switch 000001")
+        self.view.addSubview(customButton)
     }
 
     override func didReceiveMemoryWarning() {
