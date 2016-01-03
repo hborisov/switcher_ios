@@ -13,7 +13,6 @@ import Alamofire
 
 class ViewController: UIViewController {
     var counter: Int = 0
-    var buttons = [HomeControlButton]()
     var newButtons = [CustomButton]()
     
     override func viewDidLoad() {
@@ -33,14 +32,9 @@ class ViewController: UIViewController {
     
     @IBAction func SaveButtons(sender: UIButton) {
         let defaults = NSUserDefaults.standardUserDefaults()
-
-        
-        let buttonData = NSKeyedArchiver.archivedDataWithRootObject(self.buttons)
-        defaults.setObject(buttonData, forKey: "buttons")
         
         let newButtonsData = NSKeyedArchiver.archivedDataWithRootObject(self.newButtons)
         defaults.setObject(newButtonsData, forKey: "newButtons")
-        
         
         print("saved")
     }
@@ -58,41 +52,29 @@ class ViewController: UIViewController {
             let action = LampSwitchAction()
             button.addAction(action)
             
-            self.view.addSubview(button)
-        }
-        
-        for button in self.buttons {
-            print("in loading")
-            print(button.id)
-            
-            
-            Alamofire.request(.GET, "http://"+button.id+".local/state").responseJSON {response in
+            Alamofire.request(.GET, "http://"+button.switchId+".local/state").responseJSON {response in
                 
                 switch response.result {
                 case .Success:
                     
                     if let value: AnyObject = response.result.value {
                         let payload = JSON(value)
-                        if payload["state"].boolValue {
-                            button.setSwitchedOn()
-                        } else {
-                            button.setSwitchedOff()
-                        }
                         
-                        self.counter += 1
-                        button.frame = CGRect(x: Int(self.view.bounds.width - 70), y: 20+self.counter*70,
-                            width: 60, height: 60)
-                        self.view.addSubview(button)
-
+                        button.setState(payload["state"].boolValue)
                     }
                     
                 case .Failure:
                     print("")
                 }
             }
-
             
+            self.view.addSubview(button)
         }
+    
+    }
+    
+    func refreshSwitchState(switchId: String) {
+        
     }
     
     func discoverSwitches() {

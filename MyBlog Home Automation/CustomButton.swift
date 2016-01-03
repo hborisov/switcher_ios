@@ -51,12 +51,10 @@ class CustomButton: UIControl {
     }
     
     required init?(coder aDecoder: NSCoder) {
+        //DO NOT CHANGE THE ORDER OF THE FOLLOWING STATEMENTS
         self.switchState = false
         self.switchId = ""
         super.init(coder: aDecoder)
-        
-        
-        
 
         let x = aDecoder.decodeObjectForKey("x") as! CGFloat
         let y = aDecoder.decodeObjectForKey("y") as! CGFloat
