@@ -31,13 +31,44 @@
                                     <action selector="SaveButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gCd-0V-HbG"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MyBlog Home Automation" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QYA-Rb-R06">
+                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="textColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="highlightedColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <variation key="widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="78" y="39" width="245" height="20.5"/>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QYA-Rb-R06" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VoX-Ch-s3y"/>
+                            <constraint firstItem="QYA-Rb-R06" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-250" id="pW6-Dk-ULW"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="QYA-Rb-R06"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="VoX-Ch-s3y"/>
+                                <exclude reference="pW6-Dk-ULW"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="QYA-Rb-R06"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="VoX-Ch-s3y"/>
+                                <include reference="pW6-Dk-ULW"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="257" y="322"/>
+            <point key="canvasLocation" x="256.5" y="322"/>
         </scene>
     </scenes>
 </document>
