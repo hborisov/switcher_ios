@@ -7,16 +7,36 @@
 //
 
 import UIKit
+import Alamofire
+
+protocol CustomButtonDelegate {
+    func action(button: CustomButton) -> Void
+}
+
+class LampSwitchAction: CustomButtonDelegate {
+    func action(button: CustomButton) {
+        var url = "http://" + button.switchId + ".local"
+        
+        if button.switchState {
+            url += "/on"
+        } else {
+            url += "/off"
+        }
+        
+        Alamofire.request(.GET, url)
+        print("delgate action: " + url)
+    }
+}
 
 class CustomButton: UIControl {
 
-    //let titleLabel = UILabel()
     let textField = UITextView()
     var onImage = UIImage()
     var offImage = UIImage()
     
     var switchState = false
-    var id = ""
+    var switchId = ""
+    var buttonAction: CustomButtonDelegate?
     
     internal override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,22 +54,12 @@ class CustomButton: UIControl {
     func setUp() {
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
         
-
         textField.frame = CGRect(x: 0, y: 60, width:self.frame.size.width, height: 40)
         textField.textAlignment = NSTextAlignment.Center
         textField.textColor = UIColor.redColor()
+        textField.scrollEnabled = true
         self.addSubview(textField)
         
-        /*
-        titleLabel.frame = CGRect(x: 0, y: 60, width:self.frame.size.width, height: 40)
-        titleLabel.textAlignment = NSTextAlignment.Center
-        titleLabel.font = UIFont.boldSystemFontOfSize(10)
-        titleLabel.numberOfLines = 0
-        titleLabel.lineBreakMode = .ByWordWrapping
-        titleLabel.textColor = UIColor.redColor()
-        titleLabel.userInteractionEnabled = false
-        self.addSubview(titleLabel)
-        */
         let imageRect = CGRect(x: 10, y: 0, width: self.frame.size.width-20, height: self.frame.size.height - 40)
         print(imageRect)
         
@@ -84,18 +94,29 @@ class CustomButton: UIControl {
     
     func handleTap(recognizer: UITapGestureRecognizer) {
         changeState()
+        buttonAction?.action(self)
     }
     
     func changeState() {
-        switchState = !switchState
         if switchState {
-            self.backgroundColor = UIColor(patternImage: onImage)
+            setSwitchOff()
         } else {
-            self.backgroundColor = UIColor(patternImage: offImage)
+            setSwitchOn()
         }
     }
     
-
-
+    func setSwitchOn() {
+        switchState = true
+        self.backgroundColor = UIColor(patternImage: onImage)
+    }
+    
+    func setSwitchOff() {
+        switchState = false
+        self.backgroundColor = UIColor(patternImage: offImage)
+    }
+    
+    func addAction(action: CustomButtonDelegate) {
+        buttonAction = action
+    }
     
 }
