@@ -18,6 +18,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.myViewController = self
+        
         loadSwitches()
     }
 
@@ -31,12 +34,16 @@ class ViewController: UIViewController {
     }
     
     @IBAction func SaveButtons(sender: UIButton) {
+        saveSwitches()
+        
+        print("saved")
+    }
+    
+    func saveSwitches() {
         let defaults = NSUserDefaults.standardUserDefaults()
         
         let newButtonsData = NSKeyedArchiver.archivedDataWithRootObject(self.newButtons)
         defaults.setObject(newButtonsData, forKey: "newButtons")
-        
-        print("saved")
     }
     
     func loadSwitches() {

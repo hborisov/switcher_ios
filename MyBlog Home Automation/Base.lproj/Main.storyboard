@@ -17,13 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16u-gc-ZUL">
-                                <rect key="frame" x="0.0" y="543" width="600" height="30"/>
-                                <state key="normal" title="Discover Switches"/>
-                                <connections>
-                                    <action selector="clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="85f-pQ-6tH"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AU5-mu-wAT">
                                 <rect key="frame" x="6" y="505" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
@@ -31,7 +24,7 @@
                                     <action selector="SaveButtons:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gCd-0V-HbG"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Living Room" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Xrd-16-wa7">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Living Room" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Xrd-16-wa7">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -40,6 +33,16 @@
                                     <rect key="frame" x="80" y="28" width="225" height="38"/>
                                 </variation>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16u-gc-ZUL">
+                                <rect key="frame" x="0.0" y="543" width="600" height="30"/>
+                                <state key="normal" title="Discover Switches"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="56" width="600" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="85f-pQ-6tH"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <variation key="default">
