@@ -108,7 +108,11 @@ class CustomButton: UIControl {
         self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
 
         if CGRectIntersectsRect(self.frame, dropTarget.frame) {
-            dropTarget.bounds = CGRect(x: point.x, y: point.y, width: 110, height: 110)
+//            dropTarget.bounds = CGRect(x: point.x, y: point.y, width: 110, height: 110)
+            dropTarget.backgroundColor = UIColor.blueColor()
+            let temp = dropTarget as! CustomBundleButton
+            temp.addButton(self)
+
         }
        // print(CGRectIntersectsRect(self.frame, dropTarget.frame))
     }

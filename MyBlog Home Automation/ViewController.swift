@@ -14,12 +14,22 @@ import Alamofire
 class ViewController: UIViewController {
     var counter: Int = 0
     var newButtons = [CustomButton]()
+    var softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
+        width: 80, height: 100))
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         appDelegate.myViewController = self
+        
+        let action = SoftwareSwitchAction()
+        self.softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
+            width: 80, height: 100))
+        self.softwareButton.switchId = "000000"
+        self.softwareButton.setTitle("Light Switch 000000")
+        self.softwareButton.addAction(action)
+        self.view.addSubview(self.softwareButton)
         
         loadSwitches()
     }
@@ -71,7 +81,7 @@ class ViewController: UIViewController {
         for button in self.newButtons {
             let action = LampSwitchAction()
             button.addAction(action)
-            button.dropTarget = newButtons[0]
+            button.dropTarget = self.softwareButton
             
             Alamofire.request(.GET, "http://"+button.switchId+".local/state").responseJSON {response in
                 
