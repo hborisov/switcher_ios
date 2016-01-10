@@ -13,7 +13,9 @@ import Alamofire
 
 class ViewController: UIViewController {
     var counter: Int = 0
-    var newButtons = [CustomButton]()
+    var newButtons = [String: CustomButton]()
+    
+    
     var softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
         width: 80, height: 100))
     
@@ -74,11 +76,11 @@ class ViewController: UIViewController {
         let newButtonData = defaults.objectForKey("newButtons") as? NSData
 
         if let newButtonData = newButtonData {
-            let loadedNewButtons = (NSKeyedUnarchiver.unarchiveObjectWithData(newButtonData) as? [CustomButton])!
+            let loadedNewButtons = (NSKeyedUnarchiver.unarchiveObjectWithData(newButtonData) as? [String: CustomButton])!
             self.newButtons = loadedNewButtons
         }
         
-        for button in self.newButtons {
+        for button in self.newButtons.values {
             let action = LampSwitchAction()
             button.addAction(action)
             button.dropTarget = self.softwareButton
@@ -140,7 +142,7 @@ class ViewController: UIViewController {
                         customButton.switchId = post["id"].stringValue
                         customButton.setTitle("Light Switch "+post["id"].stringValue)
                         customButton.addAction(action)
-                        self.newButtons.append(customButton)
+                        self.newButtons[customButton.switchId] = customButton
                         self.view.addSubview(customButton)
                         
                     }

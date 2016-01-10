@@ -17,10 +17,20 @@ class SoftwareSwitchAction: CustomButtonDelegate {
 
 class CustomBundleButton: CustomButton {
     var buttons = [String: CustomButton]()
-    
+
     
     func addButton(button: CustomButton) {
         self.buttons[button.switchId] = button
+        
+        let imageRect = CGRect(x: 10, y: 0, width: self.frame.size.width-20, height: self.frame.size.height - 40)
+        print(imageRect)
+        
+        UIGraphicsBeginImageContext(self.frame.size)
+        UIImage(named: "light-bulb-3-on-red.png")?.drawInRect(imageRect)
+        offImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        self.backgroundColor = UIColor(patternImage: offImage)
     }
     
     func printButtons() {

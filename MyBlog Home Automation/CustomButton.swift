@@ -38,6 +38,7 @@ class CustomButton: UIControl {
     var switchId: String
     var buttonAction: CustomButtonDelegate?
     var dropTarget: UIControl
+    var dragInitialLocation = CGPoint()
     
     internal override init(frame: CGRect) {
         self.switchId = ""
@@ -100,6 +101,7 @@ class CustomButton: UIControl {
     }
     
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
         let touch: UITouch = touches.first! as UITouch
         let previousPoint = touch.previousLocationInView(self)
         let point = touch.locationInView(self)
@@ -107,14 +109,33 @@ class CustomButton: UIControl {
         let translation = CGPoint(x: point.x - previousPoint.x, y: point.y - previousPoint.y)
         self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
 
+        /*
         if CGRectIntersectsRect(self.frame, dropTarget.frame) {
-//            dropTarget.bounds = CGRect(x: point.x, y: point.y, width: 110, height: 110)
-            dropTarget.backgroundColor = UIColor.blueColor()
             let temp = dropTarget as! CustomBundleButton
             temp.addButton(self)
-
         }
-       // print(CGRectIntersectsRect(self.frame, dropTarget.frame))
+        */
+        
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.dragInitialLocation = self.center
+    }
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        let touch: UITouch = touches.first! as UITouch
+        let previousPoint = touch.previousLocationInView(self)
+        let point = touch.locationInView(self)
+        
+        let translation = CGPoint(x: point.x - previousPoint.x, y: point.y - previousPoint.y)
+        self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
+        
+        if CGRectIntersectsRect(self.frame, dropTarget.frame) {
+            let temp = dropTarget as! CustomBundleButton
+            temp.addButton(self)
+            
+            self.center = self.dragInitialLocation
+        }
     }
 
     override func encodeWithCoder(aCoder: NSCoder) {

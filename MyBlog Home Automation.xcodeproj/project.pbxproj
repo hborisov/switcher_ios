@@ -21,6 +21,7 @@
 		23919FC41C3942C300EEA764 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FC31C3942C300EEA764 /* CustomButton.swift */; };
 		23919FC61C42593600EEA764 /* light-bulb-3-on_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 23919FC51C42593600EEA764 /* light-bulb-3-on_80x80.png */; };
 		23919FC81C42F01200EEA764 /* CustomBundleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FC71C42F01200EEA764 /* CustomBundleButton.swift */; };
+		23919FCA1C430C7D00EEA764 /* light-bulb-3-on-red.png in Resources */ = {isa = PBXBuildFile; fileRef = 23919FC91C430C7D00EEA764 /* light-bulb-3-on-red.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +113,7 @@
 		23919FC31C3942C300EEA764 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		23919FC51C42593600EEA764 /* light-bulb-3-on_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-bulb-3-on_80x80.png"; sourceTree = "<group>"; };
 		23919FC71C42F01200EEA764 /* CustomBundleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBundleButton.swift; sourceTree = "<group>"; };
+		23919FC91C430C7D00EEA764 /* light-bulb-3-on-red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-bulb-3-on-red.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,6 +150,7 @@
 			children = (
 				23919F9E1C37FB4F00EEA764 /* light-bulb-3-on.png */,
 				23919FC51C42593600EEA764 /* light-bulb-3-on_80x80.png */,
+				23919FC91C430C7D00EEA764 /* light-bulb-3-on-red.png */,
 				23919F9F1C37FB4F00EEA764 /* light-bulb-3.png */,
 				23919FA01C37FB4F00EEA764 /* SwiftyJSON.swift */,
 				23919F8C1C37F7F500EEA764 /* AppDelegate.swift */,
@@ -302,6 +305,7 @@
 				23919FA21C37FB4F00EEA764 /* light-bulb-3.png in Resources */,
 				23919F921C37F7F500EEA764 /* Main.storyboard in Resources */,
 				23919FC61C42593600EEA764 /* light-bulb-3-on_80x80.png in Resources */,
+				23919FCA1C430C7D00EEA764 /* light-bulb-3-on-red.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
