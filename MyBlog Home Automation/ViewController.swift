@@ -58,6 +58,7 @@ class ViewController: UIViewController {
         for button in self.newButtons {
             let action = LampSwitchAction()
             button.addAction(action)
+            button.dropTarget = newButtons[0]
             
             Alamofire.request(.GET, "http://"+button.switchId+".local/state").responseJSON {response in
                 
@@ -77,6 +78,7 @@ class ViewController: UIViewController {
             
             self.view.addSubview(button)
         }
+
     
     }
     

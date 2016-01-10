@@ -37,15 +37,15 @@ class CustomButton: UIControl {
     var switchState: Bool
     var switchId: String
     var buttonAction: CustomButtonDelegate?
+    var dropTarget: UIControl
     
     internal override init(frame: CGRect) {
-//        super.init(frame: frame)
         self.switchId = ""
         self.switchState = false
+        self.dropTarget = UIControl()
         
         super.init(frame: frame)
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
-
 
         self.setUp()
     }
@@ -54,6 +54,7 @@ class CustomButton: UIControl {
         //DO NOT CHANGE THE ORDER OF THE FOLLOWING STATEMENTS
         self.switchState = false
         self.switchId = ""
+        self.dropTarget = UIControl()
         super.init(coder: aDecoder)
 
         let x = aDecoder.decodeObjectForKey("x") as! CGFloat
@@ -101,10 +102,15 @@ class CustomButton: UIControl {
     override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch: UITouch = touches.first! as UITouch
         let previousPoint = touch.previousLocationInView(self)
-        let point  = touch.locationInView(self)
+        let point = touch.locationInView(self)
         
-        let translation = CGPoint(x: point.x-previousPoint.x, y: point.y - previousPoint.y)
+        let translation = CGPoint(x: point.x - previousPoint.x, y: point.y - previousPoint.y)
         self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
+
+        if CGRectIntersectsRect(self.frame, dropTarget.frame) {
+            dropTarget.bounds = CGRect(x: point.x, y: point.y, width: 110, height: 110)
+        }
+       // print(CGRectIntersectsRect(self.frame, dropTarget.frame))
     }
 
     override func encodeWithCoder(aCoder: NSCoder) {
