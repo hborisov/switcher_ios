@@ -17,6 +17,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16u-gc-ZUL">
+                                <rect key="frame" x="0.0" y="543" width="600" height="30"/>
+                                <state key="normal" title="Discover Switches"/>
+                                <variation key="widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="0.0" y="56" width="600" height="30"/>
+                                </variation>
+                                <connections>
+                                    <action selector="clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="85f-pQ-6tH"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AU5-mu-wAT">
                                 <rect key="frame" x="6" y="505" width="34" height="30"/>
                                 <state key="normal" title="Save"/>
@@ -33,14 +43,14 @@
                                     <rect key="frame" x="80" y="28" width="225" height="38"/>
                                 </variation>
                             </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="16u-gc-ZUL">
-                                <rect key="frame" x="0.0" y="543" width="600" height="30"/>
-                                <state key="normal" title="Discover Switches"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pnu-RE-8rS">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Remove Switches"/>
                                 <variation key="widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="0.0" y="56" width="600" height="30"/>
+                                    <rect key="frame" x="0.0" y="94" width="121" height="30"/>
                                 </variation>
                                 <connections>
-                                    <action selector="clicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="85f-pQ-6tH"/>
+                                    <action selector="RemoveSwitches:" destination="BYZ-38-t0r" eventType="touchUpInside" id="InP-F3-jkD"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -48,11 +58,13 @@
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="Xrd-16-wa7"/>
+                                <exclude reference="Pnu-RE-8rS"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="Xrd-16-wa7"/>
+                                <include reference="Pnu-RE-8rS"/>
                             </mask>
                         </variation>
                     </view>

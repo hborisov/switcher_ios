@@ -39,6 +39,19 @@ class ViewController: UIViewController {
         print("saved")
     }
     
+    @IBAction func RemoveSwitches(sender: UIButton) {
+        self.view.subviews.forEach({
+            if $0 is CustomButton {
+            $0.removeFromSuperview()
+            }
+        })
+        
+        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+        
+        self.newButtons.removeAll()
+    }
+    
     func saveSwitches() {
         let defaults = NSUserDefaults.standardUserDefaults()
         
@@ -85,6 +98,8 @@ class ViewController: UIViewController {
     func refreshSwitchState(switchId: String) {
         
     }
+    
+
     
     func discoverSwitches() {
         
