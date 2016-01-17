@@ -17,7 +17,6 @@
 		23919FA31C37FB4F00EEA764 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FA01C37FB4F00EEA764 /* SwiftyJSON.swift */; };
 		23919FBC1C37FD0700EEA764 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23919FAF1C37FC8000EEA764 /* Alamofire.framework */; };
 		23919FBD1C37FD0700EEA764 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 23919FAF1C37FC8000EEA764 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		23919FC21C37FD4B00EEA764 /* HomeControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FC11C37FD4B00EEA764 /* HomeControlButton.swift */; };
 		23919FC41C3942C300EEA764 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FC31C3942C300EEA764 /* CustomButton.swift */; };
 		23919FC61C42593600EEA764 /* light-bulb-3-on_80x80.png in Resources */ = {isa = PBXBuildFile; fileRef = 23919FC51C42593600EEA764 /* light-bulb-3-on_80x80.png */; };
 		23919FC81C42F01200EEA764 /* CustomBundleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23919FC71C42F01200EEA764 /* CustomBundleButton.swift */; };
@@ -110,7 +109,6 @@
 		23919F9F1C37FB4F00EEA764 /* light-bulb-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "light-bulb-3.png"; path = "../../../SwiftTutorial/SwiftTutorial/light-bulb-3.png"; sourceTree = "<group>"; };
 		23919FA01C37FB4F00EEA764 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = ../../../SwiftTutorial/SwiftTutorial/SwiftyJSON.swift; sourceTree = "<group>"; };
 		23919FA41C37FC7F00EEA764 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
-		23919FC11C37FD4B00EEA764 /* HomeControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeControlButton.swift; sourceTree = "<group>"; };
 		23919FC31C3942C300EEA764 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		23919FC51C42593600EEA764 /* light-bulb-3-on_80x80.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light-bulb-3-on_80x80.png"; sourceTree = "<group>"; };
 		23919FC71C42F01200EEA764 /* CustomBundleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBundleButton.swift; sourceTree = "<group>"; };
@@ -161,7 +159,6 @@
 				23919F931C37F7F500EEA764 /* Assets.xcassets */,
 				23919F951C37F7F500EEA764 /* LaunchScreen.storyboard */,
 				23919F981C37F7F500EEA764 /* Info.plist */,
-				23919FC11C37FD4B00EEA764 /* HomeControlButton.swift */,
 				23919FC31C3942C300EEA764 /* CustomButton.swift */,
 				23919FC71C42F01200EEA764 /* CustomBundleButton.swift */,
 				23919FCB1C4C040000EEA764 /* HomeControlApp.swift */,
@@ -319,7 +316,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				23919FC21C37FD4B00EEA764 /* HomeControlButton.swift in Sources */,
 				23919FA31C37FB4F00EEA764 /* SwiftyJSON.swift in Sources */,
 				23919FCC1C4C040000EEA764 /* HomeControlApp.swift in Sources */,
 				23919FC81C42F01200EEA764 /* CustomBundleButton.swift in Sources */,

@@ -10,15 +10,11 @@ import Foundation
 import UIKit
 import Alamofire
 
-class HomeControl {
+class HomeControlApp {
     var counter: Int = 0
     var newButtons = [String: CustomButton]()
-    
-    
     var softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
         width: 80, height: 100))
-    
-    
     
     func saveSwitches() {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -67,26 +63,25 @@ class HomeControl {
         
     }
     
-    
-    
-    func discoverSwitches() {
+    func discoverSwitches(view: UIView) {
         
         for index in 1...254 {
             var url:String = "http://192.168.1."
             url += String(index)
             url += "/state"
+            print(url)
             
-            Alamofire.request(.GET, url).responseJSON {response in
+            let request = Alamofire.request(.GET, url)
+                request.validate()
+                request.responseJSON {response in
                 
                 switch response.result {
                 case .Success:
-                    
                     if let value: AnyObject = response.result.value {
                         let post = JSON(value)
-                        
                         self.counter += 1
                         
-                        
+
                         let action = LampSwitchAction()
                         let customButton = CustomButton(frame: CGRect(x: 10, y: 20+self.counter*100,
                             width: 80, height: 100))
@@ -99,16 +94,50 @@ class HomeControl {
                         customButton.setTitle("Light Switch "+post["id"].stringValue)
                         customButton.addAction(action)
                         self.newButtons[customButton.switchId] = customButton
-                        //self.view.addSubview(customButton)
-                        
+
+
+                        var customButtonsCount = 0
+                        view.subviews.forEach({
+                            if $0 is CustomButton {
+                                customButtonsCount++
+                            }
+                        })
+                            
+                        if customButtonsCount == 0 {
+                            view.addSubview(customButton)
+                        }
+
+                        var hasButton = false
+                        view.subviews.forEach({
+                            if $0 is CustomButton {
+                                if let button = $0 as? CustomButton {
+                                    if button.switchId == customButton.switchId {
+                                        hasButton = true
+                                    }
+                                }
+
+                            }
+                        })
+                        if hasButton == false {
+                            view.addSubview(customButton)
+                        }
                     }
                     
                 case .Failure:
+                    //print(response.result.error!.code)
+                    //print(url)
                     print("")
                 }
                 
             }
         }
+    }
+    
+    func removeSwitches() {
+        let appDomain = NSBundle.mainBundle().bundleIdentifier!
+        NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
+        
+        self.newButtons.removeAll()
     }
 
 }
