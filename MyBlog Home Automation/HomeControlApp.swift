@@ -13,8 +13,6 @@ import Alamofire
 class HomeControlApp {
     var counter: Int = 0
     var newButtons = [String: CustomButton]()
-    var softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
-        width: 80, height: 100))
     
     func saveSwitches() {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -35,7 +33,7 @@ class HomeControlApp {
         for button in self.newButtons.values {
             let action = LampSwitchAction()
             button.addAction(action)
-            button.dropTarget = self.softwareButton
+            //button.dropTarget.append(self.softwareButton)
             
             Alamofire.request(.GET, "http://"+button.switchId+".local/state").responseJSON {response in
                 
@@ -124,8 +122,6 @@ class HomeControlApp {
                     }
                     
                 case .Failure:
-                    //print(response.result.error!.code)
-                    //print(url)
                     print("")
                 }
                 
@@ -138,6 +134,22 @@ class HomeControlApp {
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
         
         self.newButtons.removeAll()
+    }
+
+    func addSwitch(view: UIView) {
+        let action = SoftwareSwitchAction()
+        let softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
+            width: 80, height: 100))
+        softwareButton.switchId = "000000"
+        softwareButton.setTitle("Light Switch 000000")
+        softwareButton.addAction(action)
+        
+        for b in self.newButtons.values {
+            b.dropTarget.append(softwareButton)
+        }
+        
+        self.newButtons[softwareButton.switchId] = softwareButton
+        view.addSubview(softwareButton)
     }
 
 }

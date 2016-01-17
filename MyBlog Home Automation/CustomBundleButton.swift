@@ -17,7 +17,6 @@ class SoftwareSwitchAction: CustomButtonDelegate {
 
 class CustomBundleButton: CustomButton {
     var buttons = [String: CustomButton]()
-
     
     func addButton(button: CustomButton) {
         self.buttons[button.switchId] = button
@@ -31,6 +30,11 @@ class CustomBundleButton: CustomButton {
         UIGraphicsEndImageContext()
         
         self.backgroundColor = UIColor(patternImage: offImage)
+    }
+    
+    override func encodeWithCoder(aCoder: NSCoder) {
+        super.encodeWithCoder(aCoder)
+        aCoder.encodeObject(self.dropTarget, forKey: "dropTarget")
     }
     
     func printButtons() {

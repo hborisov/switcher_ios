@@ -12,14 +12,6 @@ import Alamofire
 
 class ViewController: UIViewController {
     var appDelegate: AppDelegate!
-    /*var counter: Int = 0
-    var newButtons = [String: CustomButton]()
-    
-    
-    var softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
-        width: 80, height: 100))
-*/
-   // var homeControlApp = HomeControlApp()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +60,9 @@ class ViewController: UIViewController {
         
         appDelegate.myApp.removeSwitches()
     }
-   
+    
+    @IBAction func addSoftwareButton(sender: UIButton) {
+        appDelegate.myApp.addSwitch(self.view)
+    }
 }
 

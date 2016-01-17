@@ -37,13 +37,13 @@ class CustomButton: UIControl {
     var switchState: Bool
     var switchId: String
     var buttonAction: CustomButtonDelegate?
-    var dropTarget: UIControl
+    var dropTarget: [UIControl]
     var dragInitialLocation = CGPoint()
     
     internal override init(frame: CGRect) {
         self.switchId = ""
         self.switchState = false
-        self.dropTarget = UIControl()
+        self.dropTarget = [UIControl]()
         
         super.init(frame: frame)
         self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)
@@ -55,7 +55,7 @@ class CustomButton: UIControl {
         //DO NOT CHANGE THE ORDER OF THE FOLLOWING STATEMENTS
         self.switchState = false
         self.switchId = ""
-        self.dropTarget = UIControl()
+        self.dropTarget = [UIControl]()
         super.init(coder: aDecoder)
 
         let x = aDecoder.decodeObjectForKey("x") as! CGFloat
@@ -130,12 +130,15 @@ class CustomButton: UIControl {
         let translation = CGPoint(x: point.x - previousPoint.x, y: point.y - previousPoint.y)
         self.center = CGPoint(x: self.center.x + translation.x, y: self.center.y + translation.y)
         
-        if CGRectIntersectsRect(self.frame, dropTarget.frame) {
-            let temp = dropTarget as! CustomBundleButton
-            temp.addButton(self)
-            
-            self.center = self.dragInitialLocation
+        for currentDropTarget in dropTarget {
+            if CGRectIntersectsRect(self.frame, currentDropTarget.frame) {
+                let temp = currentDropTarget as! CustomBundleButton
+                temp.addButton(self)
+                
+                self.center = self.dragInitialLocation
+            }
         }
+        
     }
 
     override func encodeWithCoder(aCoder: NSCoder) {
