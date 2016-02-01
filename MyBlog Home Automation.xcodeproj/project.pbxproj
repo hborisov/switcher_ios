@@ -481,6 +481,7 @@
 				23919F9D1C37F7F500EEA764 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -17,25 +17,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.myApp.loadSwitches()
-        for button in appDelegate.myApp.newButtons.values {
-            self.view.addSubview(button)
-        }
-
-        /*
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.myViewController = self
-        
-        let action = SoftwareSwitchAction()
-        self.softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
-            width: 80, height: 100))
-        self.softwareButton.switchId = "000000"
-        self.softwareButton.setTitle("Light Switch 000000")
-        self.softwareButton.addAction(action)
-        self.view.addSubview(self.softwareButton)
-        
-        loadSwitches()
-        */
+        appDelegate.myApp.loadSwitches(self.view)
     }
 
     override func didReceiveMemoryWarning() {

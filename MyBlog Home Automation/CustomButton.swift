@@ -15,7 +15,7 @@ protocol CustomButtonDelegate {
 
 class LampSwitchAction: CustomButtonDelegate {
     func action(button: CustomButton) {
-        var url = "http://" + button.switchId + ".local"
+        var url = "http://" + button.ipAddress
         
         if button.switchState {
             url += "/on"
@@ -23,7 +23,13 @@ class LampSwitchAction: CustomButtonDelegate {
             url += "/off"
         }
         
-        Alamofire.request(.GET, url)
+        print("request")
+        Alamofire.request(.GET, url).response {
+            request, response, data, error in
+            print("response")
+            print(response)
+            print(request?.URL)
+        }
         print("delgate action: " + url)
     }
 }
@@ -36,12 +42,14 @@ class CustomButton: UIControl {
     
     var switchState: Bool
     var switchId: String
+    var ipAddress: String
     var buttonAction: CustomButtonDelegate?
     var dropTarget: [UIControl]
     var dragInitialLocation = CGPoint()
     
     internal override init(frame: CGRect) {
         self.switchId = ""
+        self.ipAddress = ""
         self.switchState = false
         self.dropTarget = [UIControl]()
         
@@ -55,6 +63,7 @@ class CustomButton: UIControl {
         //DO NOT CHANGE THE ORDER OF THE FOLLOWING STATEMENTS
         self.switchState = false
         self.switchId = ""
+        self.ipAddress = ""
         self.dropTarget = [UIControl]()
         super.init(coder: aDecoder)
 
@@ -63,15 +72,31 @@ class CustomButton: UIControl {
         let width = aDecoder.decodeObjectForKey("width") as! CGFloat
         let height = aDecoder.decodeObjectForKey("height") as! CGFloat
         self.frame = CGRectMake(x, y, width, height)
+        self.dropTarget = aDecoder.decodeObjectForKey("dropTarget") as! [UIControl]
         self.setUp()
         
         let switchId = aDecoder.decodeObjectForKey("switchId") as! String
         self.switchId = switchId
+        let ipAddress = aDecoder.decodeObjectForKey("ipAddress") as! String
+        self.ipAddress = ipAddress
         let switchState = aDecoder.decodeBoolForKey("switchState")
         self.setState(switchState)
         let title = aDecoder.decodeObjectForKey("title") as! String
         self.setTitle(title)
     }
+    
+    override func encodeWithCoder(aCoder: NSCoder) {
+        aCoder.encodeObject(switchId, forKey: "switchId")
+        aCoder.encodeObject(ipAddress, forKey: "ipAddress")
+        aCoder.encodeBool(switchState, forKey: "switchState")
+        aCoder.encodeObject(self.frame.origin.x, forKey: "x")
+        aCoder.encodeObject(self.frame.origin.y, forKey: "y")
+        aCoder.encodeObject(self.frame.size.width, forKey: "width")
+        aCoder.encodeObject(self.frame.size.height, forKey: "height")
+        aCoder.encodeObject(self.textField.text, forKey: "title")
+        aCoder.encodeObject(self.dropTarget, forKey: "dropTarget")
+    }
+
     
     func setUp() {
         
@@ -141,15 +166,6 @@ class CustomButton: UIControl {
         
     }
 
-    override func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(switchId, forKey: "switchId")
-        aCoder.encodeBool(switchState, forKey: "switchState")
-        aCoder.encodeObject(self.frame.origin.x, forKey: "x")
-        aCoder.encodeObject(self.frame.origin.y, forKey: "y")
-        aCoder.encodeObject(self.frame.size.width, forKey: "width")
-        aCoder.encodeObject(self.frame.size.height, forKey: "height")
-        aCoder.encodeObject(self.textField.text, forKey: "title")
-    }
     
     func setTitle(title: String) {
         textField.text = title

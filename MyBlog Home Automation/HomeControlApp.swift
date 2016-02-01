@@ -12,37 +12,45 @@ import Alamofire
 
 class HomeControlApp {
     var counter: Int = 0
-    var newButtons = [String: CustomButton]()
+    var lampSwitches = [String: CustomButton]()
     
     func saveSwitches() {
         let defaults = NSUserDefaults.standardUserDefaults()
         
-        let newButtonsData = NSKeyedArchiver.archivedDataWithRootObject(self.newButtons)
+        let newButtonsData = NSKeyedArchiver.archivedDataWithRootObject(self.lampSwitches)
         defaults.setObject(newButtonsData, forKey: "newButtons")
     }
     
-    func loadSwitches() {
+    func loadSwitches(view: UIView) {
         let defaults = NSUserDefaults.standardUserDefaults()
         let newButtonData = defaults.objectForKey("newButtons") as? NSData
         
         if let newButtonData = newButtonData {
             let loadedNewButtons = (NSKeyedUnarchiver.unarchiveObjectWithData(newButtonData) as? [String: CustomButton])!
-            self.newButtons = loadedNewButtons
+            self.lampSwitches = loadedNewButtons
         }
         
-        for button in self.newButtons.values {
-            let action = LampSwitchAction()
-            button.addAction(action)
+        for button in self.lampSwitches.values {
+            if let b = button as? [CustomBundleButton] {
+                let action = SoftwareSwitchAction()
+                button.addAction(action)
+                print("custombundle")
+            }
+            else {
+                let action = LampSwitchAction()
+                button.addAction(action)
+            }
+            
             //button.dropTarget.append(self.softwareButton)
+            view.addSubview(button)
+
             
             Alamofire.request(.GET, "http://"+button.switchId+".local/state").responseJSON {response in
                 
                 switch response.result {
                 case .Success:
-                    
                     if let value: AnyObject = response.result.value {
                         let payload = JSON(value)
-                        
                         button.setState(payload["state"].boolValue)
                     }
                     
@@ -50,14 +58,7 @@ class HomeControlApp {
                     print("")
                 }
             }
-            
-           // self.view.addSubview(button)
         }
-        
-        
-    }
-    
-    func refreshSwitchState(switchId: String) {
         
     }
     
@@ -78,9 +79,9 @@ class HomeControlApp {
                     if let value: AnyObject = response.result.value {
                         let post = JSON(value)
                         self.counter += 1
-                        
+                        print(response)
 
-                        let action = LampSwitchAction()
+
                         let customButton = CustomButton(frame: CGRect(x: 10, y: 20+self.counter*100,
                             width: 80, height: 100))
                         if post["state"].boolValue {
@@ -89,9 +90,11 @@ class HomeControlApp {
                             customButton.setSwitchOff()
                         }
                         customButton.switchId = post["id"].stringValue
+                        customButton.ipAddress = post["ip"].stringValue
                         customButton.setTitle("Light Switch "+post["id"].stringValue)
+                        let action = LampSwitchAction()
                         customButton.addAction(action)
-                        self.newButtons[customButton.switchId] = customButton
+                        self.lampSwitches[customButton.switchId] = customButton
 
 
                         var customButtonsCount = 0
@@ -133,22 +136,23 @@ class HomeControlApp {
         let appDomain = NSBundle.mainBundle().bundleIdentifier!
         NSUserDefaults.standardUserDefaults().removePersistentDomainForName(appDomain)
         
-        self.newButtons.removeAll()
+        self.lampSwitches.removeAll()
     }
 
     func addSwitch(view: UIView) {
-        let action = SoftwareSwitchAction()
+
         let softwareButton = CustomBundleButton(frame: CGRect(x: 70, y: 70,
             width: 80, height: 100))
         softwareButton.switchId = "000000"
         softwareButton.setTitle("Light Switch 000000")
+        let action = SoftwareSwitchAction()
         softwareButton.addAction(action)
         
-        for b in self.newButtons.values {
+        for b in self.lampSwitches.values {
             b.dropTarget.append(softwareButton)
         }
         
-        self.newButtons[softwareButton.switchId] = softwareButton
+        self.lampSwitches[softwareButton.switchId] = softwareButton
         view.addSubview(softwareButton)
     }
 
