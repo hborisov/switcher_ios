@@ -10,9 +10,63 @@ import Foundation
 import UIKit
 import Alamofire
 
+class ServiceDelegate : NSObject, NSNetServiceDelegate {
+    
+    func netServiceWillPublish(sender: NSNetService) {
+        print("will publish")
+    }
+    
+    func netServiceDidResolveAddress(sender: NSNetService) {
+        print("did resolve")
+    }
+    
+    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didFindService aNetService: NSNetService, moreComing: Bool) {
+        print("adding a service")
+        
+    }
+    
+    func netServiceBrowser(aNetServiceBrowser: NSNetServiceBrowser, didRemoveService aNetService: NSNetService, moreComing: Bool) {
+        print("removing service")
+    }
+}
+
+class ServiceBrowserDelegate : NSObject, NSNetServiceBrowserDelegate {
+    func netServiceBrowserWillSearch(browser: NSNetServiceBrowser) {
+        print("will search")
+    }
+    
+    func netServiceBrowserDidStopSearch(browser: NSNetServiceBrowser) {
+        print("did stop search")
+    }
+    
+    func netServiceBrowser(browser: NSNetServiceBrowser, didFindService service: NSNetService, moreComing: Bool) {
+        print("did find service")
+        print(service.hostName)
+        print(service.name)
+    }
+    
+    func netServiceBrowser(browser: NSNetServiceBrowser, didNotSearch errorDict: [String : NSNumber]) {
+        print("didnotsearch")
+    }
+    
+    func netServiceBrowser(browser: NSNetServiceBrowser, didFindDomain domainString: String, moreComing: Bool) {
+        print("didfinddomain")
+    }
+    
+    func netServiceBrowser(browser: NSNetServiceBrowser, didRemoveDomain domainString: String, moreComing: Bool) {
+        print("didRemoveDomain")
+    }
+    
+    func netServiceBrowser(browser: NSNetServiceBrowser, didRemoveService service: NSNetService, moreComing: Bool) {
+        print("didRemoveService")
+    }
+}
+
+
 class HomeControlApp {
     var counter: Int = 0
     var lampSwitches = [String: CustomButton]()
+    let nsbd = ServiceBrowserDelegate()
     
     func saveSwitches() {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -63,6 +117,11 @@ class HomeControlApp {
     }
     
     func discoverSwitches(view: UIView) {
+        
+        //let nsb = NSNetServiceBrowser()
+
+        //nsb.delegate = self.nsbd
+        //nsb.searchForServicesOfType("_http._tcp", inDomain: "")
         
         for index in 1...254 {
             var url:String = "http://192.168.1."

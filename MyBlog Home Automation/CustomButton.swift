@@ -28,7 +28,9 @@ class LampSwitchAction: CustomButtonDelegate {
             request, response, data, error in
             print("response")
             print(response)
-            print(request?.URL)
+            print(response!.statusCode)
+            print(request!.URL)
+            print(error)
         }
         print("delgate action: " + url)
     }
